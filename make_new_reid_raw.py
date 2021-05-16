@@ -20,5 +20,7 @@ for id in range(len(json_data)):
     if "captions" in json_data[id]:
         for cap_id in range(len(json_data[id]['captions'])):
             json_data[id]['captions'][cap_id] = word_tokenize(json_data[id]['captions'][cap_id], format="text")
+    cnt = cnt + 1
+    print(str(cnt))
 with codecs.open('reid_raw.json', 'w', "utf-8") as outfile:
     outfile.write(json.dumps(json_data, ensure_ascii=False))
