@@ -114,7 +114,7 @@ caption = ""
 chunked = []
 with open(myfile, 'r', encoding = "utf-8") as f0:
     json_data = json.load(f0)
-os.chdir('/home/thanhnguyen/Test/text_attribute_graph')
+os.chdir('/home/thanhnguyen/ViTAA/datasets/cuhkpedes/text_attribute_graph')
 for id in range(len(json_data)):
     if "file_path" in json_data[id]:
         file_path = json_data[id]['file_path'].replace('/','-')
@@ -139,10 +139,7 @@ for id in range(len(json_data)):
             j = 0
             while j < chunked_len:
                 state = next_state
-
-                print("j "+str(j) + " state: " + str(state) +" "+ str(chunked_len))
                 if state == READ:
-                    print(chunked[j][0] + " state: " + str(state))
                     if chunked[j][2] == 'B-NP':
                         next_state = READ
                         if chunked[j][0] in dictionary:
@@ -156,7 +153,6 @@ for id in range(len(json_data)):
                                     if dictionary[split_words[w]] < target_queue:
                                         target_queue = dictionary[split_words[w]]
                                 if "màu" in split_words[w]:
-                                    print("append")
                                     append = True
                         if chunked[j][1] == 'N':
                             tmp_queue.insert(0, chunked[j][0])
@@ -172,7 +168,6 @@ for id in range(len(json_data)):
                         next_state = TEMP
                         j = j - 1
                 if state == TEMP:
-                    print("temp")
                     if chunked[j][2] == 'B-NP':
                         next_state = INSERT
                         j = j - 1
@@ -180,16 +175,13 @@ for id in range(len(json_data)):
                         next_state = READ
                         j = j - 1
                 if state == INSERT:
-                    print("insert")
                     if target_queue in map_queue:
-                        print ("insert targer_queue: "+ str(target_queue))
                         for i in range(len(tmp_queue)):
                             item = tmp_queue.pop()
                             item = word_tokenize(item, format="text")
                             map_queue[target_queue].append(item)
                         target_queue = 999 - target_queue
                     elif append:
-                        print("append")
                         target_queue = 999 - target_queue
                         if target_queue in map_queue:
                             for i in range(len(tmp_queue)):
@@ -200,7 +192,6 @@ for id in range(len(json_data)):
                         else:
                             target_queue = 999
                     else:
-                        print("999")
                         target_queue = 999
                         tmp_queue.clear()
                     j = j - 1
@@ -214,7 +205,6 @@ for id in range(len(json_data)):
                             item = word_tokenize(item, format="text")
                             map_queue[target_queue].append(item)
                     elif append:
-                        print("append")
                         target_queue = 999 - target_queue
                         if target_queue in map_queue:
                             for i in range(len(tmp_queue)):
