@@ -2,6 +2,7 @@ import os
 import json
 import codecs
 from underthesea import chunk
+from underthesea import word_tokenize
 UPPERBODY = 1
 LOWERBODY = 2
 PERSON = 5
@@ -184,6 +185,7 @@ for id in range(len(json_data)):
                         print ("insert targer_queue: "+ str(target_queue))
                         for i in range(len(tmp_queue)):
                             item = tmp_queue.pop()
+                            item = word_tokenize(item, format="text")
                             map_queue[target_queue].append(item)
                         target_queue = 999 - target_queue
                     elif append:
@@ -192,6 +194,7 @@ for id in range(len(json_data)):
                         if target_queue in map_queue:
                             for i in range(len(tmp_queue)):
                                 item = tmp_queue.pop()
+                                item = word_tokenize(item, format="text")
                                 map_queue[target_queue].append(item)
                             target_queue = 999 - target_queue
                         else:
@@ -208,6 +211,7 @@ for id in range(len(json_data)):
                     if target_queue in map_queue:
                         for i in range(len(tmp_queue)):
                             item = tmp_queue.pop()
+                            item = word_tokenize(item, format="text")
                             map_queue[target_queue].append(item)
                     elif append:
                         print("append")
@@ -215,6 +219,7 @@ for id in range(len(json_data)):
                         if target_queue in map_queue:
                             for i in range(len(tmp_queue)):
                                 item = tmp_queue.pop()
+                                item = word_tokenize(item, format="text")
                                 map_queue[target_queue].append(item)
                             target_queue = 999 - target_queue
                         else:
