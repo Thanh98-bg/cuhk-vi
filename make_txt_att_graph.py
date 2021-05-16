@@ -239,10 +239,6 @@ for id in range(len(json_data)):
                 data.insert(0,{"person":person_lst})
             with codecs.open(file_name, 'w', "utf-8") as outfile:
                     outfile.write(json.dumps(data, ensure_ascii=False))         
-
-
             print(file_name)
             file_name = ""
-        cnt = cnt + 1
-        if cnt == 10:
-            break
+
