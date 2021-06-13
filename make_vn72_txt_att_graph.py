@@ -142,19 +142,20 @@ for id in range(len(json_data)):
             face_lst.clear()
             j = 0
             temp = ""
+            chunked_j0 = ""
             while j < chunked_len:
                 temp = chunked[j][0]
-                chunked[j][0] = temp.lower()
+                chunked_j0 = temp.lower()
                 state = next_state
                 if state == READ:
                     if chunked[j][2] == 'B-NP':
                         next_state = READ
-                        if chunked[j][0] in dictionary:
-                            if dictionary[chunked[j][0]] < target_queue:
-                                target_queue = dictionary[chunked[j][0]]
+                        if chunked_j0 in dictionary:
+                            if dictionary[chunked_j0] < target_queue:
+                                target_queue = dictionary[chunked_j0]
                         else:
                             #split and check
-                            split_words = chunked[j][0].split()
+                            split_words = chunked_j0.split()
                             for w in range(len(split_words)):
                                 if split_words[w] in dictionary:
                                     if dictionary[split_words[w]] < target_queue:
@@ -172,7 +173,7 @@ for id in range(len(json_data)):
                             tmp_queue.insert(0, temp)
                         next_state = TEMP
                         #j = j -1
-                    elif chunked[j][0] == '/':
+                    elif chunked_j0 == '/':
                         next_state = READ
                     else:
                         next_state = TEMP
