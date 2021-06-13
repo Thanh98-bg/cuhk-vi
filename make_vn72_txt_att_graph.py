@@ -148,6 +148,7 @@ for id in range(len(json_data)):
                 chunked_j0 = temp.lower()
                 state = next_state
                 if state == READ:
+                    print("read"+file_name)
                     if chunked[j][2] == 'B-NP':
                         next_state = READ
                         if chunked_j0 in dictionary:
@@ -172,20 +173,26 @@ for id in range(len(json_data)):
                         if tmp_queue.count(temp) == 0:
                             tmp_queue.insert(0, temp)
                         next_state = TEMP
+                        print("TEMP-CASE-1")
                         #j = j -1
                     elif chunked_j0 == '/':
                         next_state = READ
                     else:
                         next_state = TEMP
                         j = j - 1
+                        print("TEMP-CASE-2" + " "+ chunked_j0 + "end")
                 if state == TEMP:
+                    print("temp"+file_name)
                     if chunked[j][2] == 'B-NP':
                         next_state = INSERT
                         j = j - 1
-                    elif chunked[j][2] == 'B-AP':
+                    elif chunked[j][2] == 'B-AP' and processed_token.count(temp) > 0:
                         next_state = READ
                         j = j - 1
+                    else:
+                        j=j+1
                 if state == INSERT:
+                    print("insert"+ file_name)
                     if target_queue in map_queue:
                         for i in range(len(tmp_queue)):
                             item = tmp_queue.pop()
