@@ -19,10 +19,6 @@ for file in os.listdir():
             arr.clear()
             for key in my_dict:
                 arr.append(key)
-            print(arr)
-        print(json_data)
     print(str(cnt) + " " + file)
-    if cnt == 100 :
-        break
-    #with codecs.open(file, 'w', "utf-8") as outfile:
-        #outfile.write(json.dumps(json_data, ensure_ascii=False))
+    with codecs.open(file, 'w', "utf-8") as outfile:
+        outfile.write(json.dumps(json_data, ensure_ascii=False))

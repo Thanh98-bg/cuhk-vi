@@ -1,7 +1,7 @@
 import nltk
 from nltk.corpus import stopwords
 
-text = raw_input("Enter the text please ...")
+text = "ok man in black"
 print(text)
 
 sentence_re = r'(?:(?:[A-Z])(?:.[A-Z])+.?)|(?:\w+(?:-\w+)*)|(?:\$?\d+(?:.\d+)?%?)|(?:...|)(?:[][.,;"\'?():-_`])'

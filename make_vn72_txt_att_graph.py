@@ -47,7 +47,7 @@ dictionary = {
     "đôi ủng":SHOE,
     "ủng":SHOE,
     "dép":SHOE,
-    "dép lê":SHOE
+    "dép lê":SHOE,
     "tất":SHOE,
     "vớ":SHOE,
     "tóc":HAIR,
@@ -144,7 +144,7 @@ for id in range(len(json_data)):
             temp = ""
             while j < chunked_len:
                 temp = chunked[j][0]
-                chunked[j][0] = chunked[j][0].lower()
+                chunked[j][0] = temp.lower()
                 state = next_state
                 if state == READ:
                     if chunked[j][2] == 'B-NP':
