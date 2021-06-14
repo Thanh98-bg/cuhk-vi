@@ -1,1 +1,1 @@
-[{"person": ["anh", "thanhniên", "thấp", "màu", "đen"]}, {"upperbody": ["áo", "sơmi", "trắng", "áo"]}, {"lowerbody": ["quần", "đen", "dài"]}, {"other": ["thắtlưng", "càvạt", "màu", "đen", "vai"]}]
+[{"person": ["anh", "thanhniên"]}, {"upperbody": ["áo", "sơmi", "trắng", "tay", "màu", "đen", "gấu", "áo", "màu", "phần", "thân", "áo"]}, {"lowerbody": ["quần", "đen", "dài"]}, {"hair": ["tóc", "đen", "ngắn"]}, {"shoe": ["thấp", "màu", "đen"]}, {"other": ["thắtlưng", "càvạt", "màu", "đen", "phần", "vai"]}]
