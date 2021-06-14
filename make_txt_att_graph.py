@@ -14,10 +14,11 @@ BACKPACK = 8
 OTHER = 10
 GLASSES = 9
 os.chdir('/home/thanhnguyen/Test/cuhk-vi')
-myfile = 'cuhk_vi_20202.json'
+myfile = 'vi-72-Copy.json'
 cnt = 0
 dictionary = {
     "áo": UPPERBODY,
+    "phéc mơ tuya":UPPERBODY,
     "quần": LOWERBODY,
     "váy": LOWERBODY,
     "kaki":LOWERBODY,
@@ -33,6 +34,7 @@ dictionary = {
     "cậu": PERSON,
     "gái":PERSON,
     "con gái":PERSON,
+    "nữ giới":PERSON,
     "con trai":PERSON,
     "trai":PERSON,
     "quý bà":PERSON,
@@ -40,10 +42,12 @@ dictionary = {
     "cô":PERSON,
     "anh":PERSON,
     "sinh viên":PERSON,
+    "thanh niên":PERSON,
     "giày":SHOE,
     "đôi ủng":SHOE,
     "ủng":SHOE,
     "dép":SHOE,
+    "dép lê":SHOE,
     "tất":SHOE,
     "vớ":SHOE,
     "sneaker":SHOE,
@@ -111,6 +115,7 @@ file_path = ""
 file_name = ""
 caption = ""
 chunked = []
+processed_token = []
 with open(myfile, 'r', encoding = "utf-8") as f0:
     json_data = json.load(f0)
 os.chdir('/home/thanhnguyen/ViTAA/datasets/cuhkpedes/text_attribute_graph')
@@ -119,6 +124,7 @@ for id in range(len(json_data)):
         file_path = json_data[id]['file_path'].replace('/','-')
     if "captions" in json_data[id]:
         for cap_id in range(len(json_data[id]['captions'])):
+            processed_token = json_data[id]['processed_tokens'][cap_id]
             file_name = file_path + "-" + str(cap_id) + ".json"
             caption = json_data[id]['captions'][cap_id]
             chunked = chunk(caption)
@@ -177,16 +183,20 @@ for id in range(len(json_data)):
                     if target_queue in map_queue:
                         for i in range(len(tmp_queue)):
                             item = tmp_queue.pop()
-                            item = word_tokenize(item, format="text")
-                            map_queue[target_queue].append(item)
+                            #item = word_tokenize(item, format="text")
+                            if processed_token.count(item) > 0:
+                                item = item.replace(" ","")
+                                map_queue[target_queue].append(item)
                         target_queue = 999 - target_queue
                     elif append:
                         target_queue = 999 - target_queue
                         if target_queue in map_queue:
                             for i in range(len(tmp_queue)):
                                 item = tmp_queue.pop()
-                                item = word_tokenize(item, format="text")
-                                map_queue[target_queue].append(item)
+                                #item = word_tokenize(item, format="text")
+                                if processed_token.count(item) > 0:
+                                    item = item.replace(" ","")
+                                    map_queue[target_queue].append(item)
                             target_queue = 999 - target_queue
                         else:
                             target_queue = 999
@@ -201,15 +211,19 @@ for id in range(len(json_data)):
                     if target_queue in map_queue:
                         for i in range(len(tmp_queue)):
                             item = tmp_queue.pop()
-                            item = word_tokenize(item, format="text")
-                            map_queue[target_queue].append(item)
+                            #item = word_tokenize(item, format="text")
+                            if processed_token.count(item) > 0:
+                                item = item.replace(" ","")
+                                map_queue[target_queue].append(item)
                     elif append:
                         target_queue = 999 - target_queue
                         if target_queue in map_queue:
                             for i in range(len(tmp_queue)):
                                 item = tmp_queue.pop()
-                                item = word_tokenize(item, format="text")
-                                map_queue[target_queue].append(item)
+                                #item = word_tokenize(item, format="text")
+                                if processed_token.count(item) > 0:
+                                    item = item.replace(" ","")
+                                    map_queue[target_queue].append(item)
                             target_queue = 999 - target_queue
                         else:
                             target_queue = 999
